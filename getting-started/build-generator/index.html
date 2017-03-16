@@ -1,0 +1,1514 @@
+
+<!DOCTYPE html>
+<html class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Documentation for the Atomist Developer Platform">
+      
+      
+      
+        <meta name="author" content="The Atomist Team">
+      
+      
+        <link rel="shortcut icon" href="../../images/favicon.ico">
+      
+      <meta name="generator" content="mkdocs-0.16.2, mkdocs-material-1.4.1">
+    
+    
+      
+        <title>Build a Generator - The Atomist Documentation</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-56ade86843.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-76741b64bc.css">
+      
+        <link rel="stylesheet" href="../../assets/stylesheets/application-66fa0d9bba.palette.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    
+  </head>
+  
+  
+  
+  
+    <body data-md-color-primary="green" data-md-color-accent="green">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../.." title="The Atomist Documentation" class="md-logo md-header-nav__button">
+            <img src="../../images/atomist-logo-horiz-reversed.svg" width="24" height="24">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+                <span class="md-header-nav__parent">
+                  Getting Started
+                </span>
+              
+                <span class="md-header-nav__parent">
+                  Build Your Own Development Automation
+                </span>
+              
+            
+            Build a Generator
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <div class="md-search__overlay"></div>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          
+            
+
+
+  
+
+
+  <a href="https://github.com/atomist/rug" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Rug
+    </div>
+  </a>
+
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-logo md-nav__button">
+        <img src="../../images/atomist-logo-horiz-reversed.svg">
+      </i>
+    
+    The Atomist Documentation
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+
+  <a href="https://github.com/atomist/rug" title="Go to repository" class="md-source" data-md-source="github">
+    
+      <div class="md-source__icon">
+        <svg viewBox="0 0 24 24" width="24" height="24">
+          <use xlink:href="#github" width="24" height="24"></use>
+        </svg>
+      </div>
+    
+    <div class="md-source__repository">
+      Rug
+    </div>
+  </a>
+
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1">
+    
+    <label class="md-nav__link" for="nav-1">
+      Overview
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Overview
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../concepts/" title="Concepts" class="md-nav__link">
+      Concepts
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../capabilities/" title="Capabilities" class="md-nav__link">
+      Capabilities
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Getting Started
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Getting Started
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../prerequisites/" title="Prerequisites" class="md-nav__link">
+      Prerequisites
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../invite-atomist-to-slack/" title="Invite Atomist to Slack" class="md-nav__link">
+      Invite Atomist to Slack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connect-atomist-to-github/" title="Connect Atomist to GitHub" class="md-nav__link">
+      Connect Atomist to GitHub
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../putting-atomist-to-work/" title="Putting Atomist to Work" class="md-nav__link">
+      Putting Atomist to Work
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../connect-atomist-to-ci/" title="Connect Atomist to CI" class="md-nav__link">
+      Connect Atomist to CI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-7" type="checkbox" id="nav-2-7" checked>
+    
+    <label class="md-nav__link" for="nav-2-7">
+      Build Your Own Development Automation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-7">
+        Build Your Own Development Automation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-your-own-development-automation/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../build-handler/" title="Build a Handler" class="md-nav__link">
+      Build a Handler
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Build a Generator
+      </label>
+    
+    <a href="./" title="Build a Generator" class="md-nav__link md-nav__link--active">
+      Build a Generator
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#make-an-existing-project-a-generator" title="Make an Existing Project a Generator" class="md-nav__link">
+    Make an Existing Project a Generator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-your-new-project-generator" title="Publishing Your New Project Generator" class="md-nav__link">
+    Publishing Your New Project Generator
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../what-next/" title="What next" class="md-nav__link">
+      What next
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      User Guide
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-2" type="checkbox" id="nav-3-2">
+    
+    <label class="md-nav__link" for="nav-3-2">
+      Rug
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-2">
+        Rug
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/runtime/" title="Runtime" class="md-nav__link">
+      Runtime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/handlers/" title="Handlers" class="md-nav__link">
+      Handlers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/commands/" title="Commands" class="md-nav__link">
+      Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/editors/" title="Editors" class="md-nav__link">
+      Editors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/generators/" title="Generators" class="md-nav__link">
+      Generators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/reviewers/" title="Reviewers" class="md-nav__link">
+      Reviewers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/path-expressions/" title="Path Expressions" class="md-nav__link">
+      Path Expressions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/microgrammars/" title="Microgrammars" class="md-nav__link">
+      Microgrammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/templates/" title="Templates" class="md-nav__link">
+      Templates
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/tests/" title="Tests" class="md-nav__link">
+      Tests
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/projects/" title="Projects" class="md-nav__link">
+      Projects
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/archives/" title="Archives" class="md-nav__link">
+      Archives
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/lifecycle/" title="Lifecycle" class="md-nav__link">
+      Lifecycle
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/rug/conventions/" title="Conventions" class="md-nav__link">
+      Conventions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-3" type="checkbox" id="nav-3-3">
+    
+    <label class="md-nav__link" for="nav-3-3">
+      Integrations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-3">
+        Integrations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/integrations/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/integrations/slack/" title="Slack" class="md-nav__link">
+      Slack
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/integrations/github/" title="GitHub.com" class="md-nav__link">
+      GitHub.com
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/integrations/travis-ci/" title="Travis CI" class="md-nav__link">
+      Travis CI
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/integrations/jenkins/" title="Jenkins" class="md-nav__link">
+      Jenkins
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4" type="checkbox" id="nav-3-4">
+    
+    <label class="md-nav__link" for="nav-3-4">
+      Interfaces
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-4">
+        Interfaces
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/bot/" title="Bot" class="md-nav__link">
+      Bot
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-4-3" type="checkbox" id="nav-3-4-3">
+    
+    <label class="md-nav__link" for="nav-3-4-3">
+      CLI
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-3-4-3">
+        CLI
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/cli/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/cli/install/" title="Installation" class="md-nav__link">
+      Installation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/cli/basics/" title="Basics" class="md-nav__link">
+      Basics
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/cli/using-rugs/" title="Using Rugs" class="md-nav__link">
+      Using Rugs
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/interfaces/cli/developing-rugs/" title="Developing Rugs" class="md-nav__link">
+      Developing Rugs
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5">
+    
+    <label class="md-nav__link" for="nav-3-5">
+      Permissions
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        Permissions
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/permissions/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/permissions/slack/" title="Slack Scopes" class="md-nav__link">
+      Slack Scopes
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../user-guide/permissions/github/" title="GitHub Scopes" class="md-nav__link">
+      GitHub Scopes
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Reference Documentation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Reference Documentation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2" type="checkbox" id="nav-4-2">
+    
+    <label class="md-nav__link" for="nav-4-2">
+      Rug
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-4-2">
+        Rug
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-2" type="checkbox" id="nav-4-2-2">
+    
+    <label class="md-nav__link" for="nav-4-2-2">
+      Rugs
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-2">
+        Rugs
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/rugs/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/editors/" title="Editors" class="md-nav__link">
+      Editors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/generators/" title="Generators" class="md-nav__link">
+      Generators
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/path-expressions/" title="Path Expressions" class="md-nav__link">
+      Path Expressions
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/extensions/" title="Extensions" class="md-nav__link">
+      Extensions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4-2-4" type="checkbox" id="nav-4-2-4">
+    
+    <label class="md-nav__link" for="nav-4-2-4">
+      DSL
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-4-2-4">
+        DSL
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/dsl/" title="Overview" class="md-nav__link">
+      Overview
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/dsl/syntax/" title="Syntax" class="md-nav__link">
+      Syntax
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug/dsl/javascript/" title="Using JavaScript" class="md-nav__link">
+      Using JavaScript
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../reference/rug-cli/" title="Rug CLI" class="md-nav__link">
+      Rug CLI
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#make-an-existing-project-a-generator" title="Make an Existing Project a Generator" class="md-nav__link">
+    Make an Existing Project a Generator
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publishing-your-new-project-generator" title="Publishing Your New Project Generator" class="md-nav__link">
+    Publishing Your New Project Generator
+  </a>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Build a Generator</h1>
+                
+                <p>Now it&rsquo;s time to create your own project generator. Atomist generators take an existing, working project and convert them into the baseline for further projects, optionally editing parts of the baseline project where customization is needed.</p>
+<div class="admonition note">
+<p>Unlike other project creation approaches, such as templating, Atomist generators don&rsquo;t break your project as they only add files in the <code>.atomist</code> directory and leave your project&rsquo;s code as-is. For this reason <em>any working project can be an Atomist generator</em>.</p>
+</div>
+<p>For the simplest case to create a new generator of our own we will need to:</p>
+<ul>
+<li>Take an existing project and convert it to being a Rug archive with a default generator that simply copies over the baseline project&rsquo;s files into a new project.</li>
+<li>Publish your new generator so that it can be invoked by your team only.</li>
+</ul>
+<h3 id="make-an-existing-project-a-generator">Make an Existing Project a Generator<a class="headerlink" href="#make-an-existing-project-a-generator" title="Permanent link">&para;</a></h3>
+<p>First make sure you have already <a href="../../user-guide/interfaces/cli/install/">installed the latest Rug CLI</a>
+for your platform. You&rsquo;ll need the <a href="../../user-guide/interfaces/cli/">Rug CLI</a> to publish your new rug archive.</p>
+<p>As you are going to use the Bot to convert your existing project into being a generator you also need to make sure that your baseline project is already in GitHub in its own repository and the repository is connected to a channel in Slack that Atomist has been invited to.</p>
+<div class="admonition note">
+<p>We&rsquo;ll be converting an existing .NET project to becoming a generator but <em>any</em> existing project can be converted using this approach.</p>
+</div>
+<p>Now navigate to the channel associated with the project you&rsquo;re going to convert to being a generator and execute:</p>
+<div class="codehilite"><pre><span></span>@atomist editors convert
+</pre></div>
+
+
+<p>This will produce a list of editors that include the search term <code>convert</code> somewhere in their description.</p>
+<div class="ss-container">
+  <img src="../images/convert-project-editors.png" alt="Convert Editors" class="ss-small">
+</div>
+
+<p>The editor we want is <code>ConvertExistingProjectToGenerator</code>. Click on the <code>Edit Project</code> button next to that editor to start a new thread to apply this editor to the channel&rsquo;s associated project.</p>
+<div class="ss-container">
+  <img src="../images/convert-project-thread-started.png" alt="Convert project to generator thread started" class="ss-small">
+</div>
+
+<p>Respond to each of the editor&rsquo;s questions and the submit the editor:</p>
+<div class="ss-container">
+  <img src="../images/ready-to-submit-editor-parameters.png" alt="Convert project parameters ready to be submitted" class="ss-small">
+</div>
+
+<p>Click on <code>Edit project</code> to execute the edit and a new commit will be created on a new branch on the project that is being converted to being a generator:</p>
+<div class="ss-container">
+  <img src="../images/editor-successfully-commits.png" alt="Successful commits reported for the editor" class="ss-small">
+</div>
+
+<p>Click on the link for the new commit and you will see that there is a new PR raised for the branch:</p>
+<div class="ss-container">
+  <img src="../images/convert-to-generator-pr-result.png" alt="PR associated with the result of the editor" class="ss-small">
+</div>
+
+<p>Merge the new PR into your project:</p>
+<div class="ss-container">
+  <img src="../images/merge-convert-pull-request.png" alt="Merge the editor's PR into your project" class="ss-small">
+</div>
+
+<p>Now update your local copy of the project and you should see that the <code>.atomist</code> directory has been added. Atomist keeps all of its files in the <code>.atomist</code> directory so that there should be no conflicts with your project&rsquo;s files.</p>
+<p>Execute <code>rug test</code> in your project&rsquo;s directory to ensure that everything is working for your new Rug generator project:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> rug <span class="nb">test</span>
+<span class="go">Resolving dependencies for yourorg:dotnetgettingstarted:0.1.0 ← local completed</span>
+<span class="go">Invoking TypeScript Compiler on ts script sources</span>
+<span class="go">  Created .atomist/editors/NewDotNetASPCoreProject.js</span>
+<span class="go">  Created .atomist/editors/NewDotNetASPCoreProject.js.map</span>
+<span class="go">Processing script sources completed</span>
+<span class="go">Loading yourorg:dotnetgettingstarted:0.1.0 ← local into runtime completed</span>
+<span class="go">Executing scenario NewDotNetASPCoreProject should create a new project based on this archive...</span>
+<span class="go">  Testing assertion fileExists(SimpleLiteral(.gitignore))</span>
+<span class="go">  Testing assertion fileExists(SimpleLiteral(Program.cs))</span>
+<span class="go">  Testing assertion fileExists(SimpleLiteral(README.md))</span>
+<span class="go">  Testing assertion fileExists(SimpleLiteral(Startup.cs))</span>
+<span class="go">  Testing assertion fileExists(SimpleLiteral(project.json))</span>
+<span class="go">Running test scenarios in yourorg:dotnetgettingstarted:0.1.0 ← local completed</span>
+
+<span class="go">Successfully executed 1 of 1 scenarios: Test SUCCESS</span>
+</pre></div>
+
+
+<p>To see what&rsquo;s been added, use the Rug CLI by executing <code>rug shell -l</code> and then <code>describe archive</code> to see the contents of your new Rug archive:</p>
+<div class="codehilite"><pre><span></span><span class="go">rug → describe archive</span>
+<span class="go">Restoring yourorg:dotnetgettingstarted:0.1.0 ← local into runtime completed</span>
+
+<span class="go">yourorg:dotnetgettingstarted:0.1.0</span>
+
+<span class="go">→ Origin</span>
+<span class="go">  git@github.com:yourorg/dotnetgettingstarted.git#master (79e34ae)</span>
+<span class="go">→ Archive</span>
+<span class="go">  ~/workspace/dotnetgettingstarted/ (761 kb in 126 files)</span>
+
+<span class="go">→ Generators</span>
+<span class="go">  NewDotNetASPCoreProject</span>
+<span class="go">    Sample TypeScript generator used by AddNewDotNetASPCoreProject</span>
+
+<span class="go">→ Requires</span>
+<span class="go">  [0.12.0,1.0.0)</span>
+
+<span class="go">To get more information on any of the Rugs listed above, run:</span>
+<span class="go">  describe editor|generator|executor|reviewer ARTIFACT</span>
+<span class="go">yourorg:dotnetgettingstarted:0.1.0 ← local</span>
+</pre></div>
+
+
+<p>Congratulations, you now have a new generator. It&rsquo;s usually a good idea at this point to give things a test run and so run the generator in the <code>rug shell</code> using the <code>generate</code> command, for example:</p>
+<div class="codehilite"><pre><span></span><span class="go">rug → generate NewDotNetASPCoreProject newdotnetservice -C ../</span>
+</pre></div>
+
+
+<p>The <code>-C</code> changes the directory to above where you&rsquo;re running the shell for the output of the generator. Go now and check out the output and make sure it is still a working project. You should now be able to change directory to where you generated your new project and be able to test and run it as usual.</p>
+<p>With the new generator created, now it&rsquo;s time to publish it so you can list and execute it using the Atomist Bot from your team&rsquo;s Slack.</p>
+<h3 id="publishing-your-new-project-generator">Publishing Your New Project Generator<a class="headerlink" href="#publishing-your-new-project-generator" title="Permanent link">&para;</a></h3>
+<p>Similar to how you published your handlers project previously, this time you&rsquo;re going to publish your new generator Rug archive. Execute the <code>rug publish</code> command from inside your generator&rsquo;s project directory:</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> rug publish
+<span class="go">Resolving dependencies for yourorg:dotnetgettingstarted:0.1.0 ← local completed</span>
+<span class="go">Invoking TypeScript Compiler on ts script sources</span>
+<span class="go">  Created .atomist/editors/NewDotNetASPCoreProject.js.map</span>
+<span class="go">  Created .atomist/editors/NewDotNetASPCoreProject.js</span>
+<span class="go">Processing script sources completed</span>
+<span class="go">Loading yourorg:dotnetgettingstarted:0.1.0 ← local into runtime completed</span>
+<span class="go">  Created META-INF/maven/yourorg/dotnetgettingstarted/pom.xml</span>
+<span class="go">  Created .atomist/manifest.yml</span>
+<span class="go">  Created .atomist/metadata.json</span>
+<span class="go">Generating archive metadata completed</span>
+<span class="go">  Uploading yourorg/dotnetgettingstarted/0.1.0/dotnetgettingstarted-0.1.0.zip → t3v0s7ss2 (155 kb) succeeded</span>
+<span class="go">  Uploading yourorg/dotnetgettingstarted/0.1.0/dotnetgettingstarted-0.1.0.pom → t3v0s7ss2 (659 bytes) succeeded</span>
+<span class="go">  Uploading yourorg/dotnetgettingstarted/0.1.0/dotnetgettingstarted-0.1.0-metadata.json → t3v0s7ss2 (897 bytes) succeeded</span>
+<span class="go">  Downloading yourorg/dotnetgettingstarted/maven-metadata.xml ← t3v0s7ss2 (394 bytes) succeeded</span>
+<span class="go">  Uploading yourorg/dotnetgettingstarted/maven-metadata.xml → t3v0s7ss2 (346 bytes) succeeded</span>
+<span class="go">Publishing archive into remote repository completed</span>
+
+<span class="go">→ Archive</span>
+<span class="go">  ~/workspace/dotnetgettingstarted/.atomist/target/dotnetgettingstarted-0.1.0.zip (155 kb in 128 files)</span>
+
+<span class="go">→ URL</span>
+<span class="go">  https://atomist.jfrog.io/atomist/T3V0S7SS2/yourorg/dotnetgettingstarted/0.1.0/dotnetgettingstarted-0.1.0.zip</span>
+</pre></div>
+
+
+<p>With your new generator&rsquo;s rug archive published it&rsquo;s now time to switch over to your team&rsquo;s Slack again. Before you can see your new generator you will need to ask the Atomist Bot to refresh the rugs it is aware of by executing <code>@atomist refresh rugs</code>:</p>
+<div class="ss-container">
+  <img src="../images/refreshing-rugs.png" alt="Refreshing the Rugs that Atomist is aware of" class="ss-small">
+</div>
+
+<div class="admonition note">
+<p>You don&rsquo;t always have to explicitly ask the Atomist Bot to refresh its rugs as it does this automatically every few minutes. Here you are manually triggering the refresh just to be sure that you can see your new generator.</p>
+</div>
+<p>Now you can list the generators using <code>@atomist generators &lt;your search term&gt;</code> and you should see your new generator in the list for your team:</p>
+<div class="ss-container">
+  <img src="../images/new-generator-project-in-slack.png" alt="Your new generator all set to go in your team's Slack" class="ss-small">
+</div>
+
+<p>You&rsquo;ve now converted a working project of your own to a new project generator to be used within Atomist! Go ahead and click the <code>Generate project</code> button in your team&rsquo;s Slack and you can create a whole new project quickly and easily.</p>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../build-handler/" title="Build a Handler" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Build a Handler
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../what-next/" title="What next" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                What next
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            &copy; 2017 Atomist, Inc.
+          </div>
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+  <div class="md-footer-social">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+      <a href="https://the-composition.com/" class="md-footer-social__link fa fa-medium"></a>
+    
+      <a href="https://github.com/atomist" class="md-footer-social__link fa fa-github"></a>
+    
+      <a href="https://twitter.com/atomist" class="md-footer-social__link fa fa-twitter"></a>
+    
+      <a href="https://join.atomist.com/" class="md-footer-social__link fa fa-slack"></a>
+    
+  </div>
+
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-3964c0cb56.js"></script>
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+      <script>!function(e,t,a,n,o,c,i){e.GoogleAnalyticsObject=o,e[o]=e[o]||function(){(e[o].q=e[o].q||[]).push(arguments)},e[o].l=1*new Date,c=t.createElement(a),i=t.getElementsByTagName(a)[0],c.async=1,c.src=n,i.parentNode.insertBefore(c,i)}(window,document,"script","https://www.google-analytics.com/analytics.js","ga"),ga("create","UA-74966852-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview");var links=document.getElementsByTagName("a");Array.prototype.map.call(links,function(e){e.host!=document.location.host&&e.addEventListener("click",function(){var t=e.getAttribute("data-md-action")||"follow";ga("send","event","outbound",t,e.href)})});var query=document.forms.search.query;query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})</script>
+      
+    
+  </body>
+</html>
